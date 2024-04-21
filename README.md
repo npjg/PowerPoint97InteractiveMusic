@@ -1,20 +1,35 @@
-# PowerPoint Custom Soundtrack
 
-Calvin Buckley has a great summary of the [DirectMusic-based music generator https://cmpct.info/~calvin/Articles/PowerPointSoundtracks/] included with PowerPoint 97 and  still supported on modern PowerPoint.
+In `VALUPACK/MUSICTRK` on the English Office 97 CD-ROM, there lives a little-known music generator for PowerPoint. It seems to be based on an early iteration of DirectMusic - likely from the Interactive Music Architecture (IMA) days.
 
-The VBA Add-In and DLL behind it were mentioned, but only the references in the VBA project were shown.
-I was curious what was actually inside the VBA Add-In, so I endeavored to open it up - first in the PowerPoint 97 VBA editor, and second with modern software.
+The music files installed to `C:\Interactive Music` are **styles (`.STY`)** and **personalities (`.PER`)**. The STYs are just like in DirectMusic, and DirectMusic Producer can open them just fine. But what DirectMusic later called "chordmaps" are instead "personalities". These "personailities" do include chordmap-like information... but no version of DirectMusic Producer I've found, going back to the DirectX 7 beta, can open these "personailities". The internal file structure of these personalities dramatically differs from DirectMusic chordmaps.
 
-## Installation
-First, of course, you must install the Custom Soundtracks Add-In. (It's at `VALUPACK/MUSICTRK` on the English Office 97 CD-ROM.) 
- - C:\Interactive Music\
- - C:\Program Files\Microsoft Office
+This project has several goals:
+ - Identify the music generation engine, since it likely predates DirectMusic.
+ - Find the application that can natively create and edit personailities.
+ - Write a script to convert personalities to DirectMusic chordmaps, natively editable in DirectMusic Producer.
 
-## In Office 97 VBA Editor
+It seems to be possible to use this Add-In [on modern PowerPoint](https://cmpct.info/~calvin/Articles/PowerPointSoundtracks/), which is pretty cool.
 
-Make sure all PowerPoint 97 instances are closed, and then change the following Registry value to True: `HKEY_CURRENT_USER\Software\Microsoft\Office\8.0\PowerPoint\Options\DebugAddins`. (You might also have to search the Registry and change it in other places too.)
+# Who else uses this pre-DirectMusic engine?
+I expect research conducted on this PowerPoint music generator to transfer to these:
+ - *Blood II: The Chosen* (1997)
+ - *Shogo: Mobile Armor Division* (1998)
+ - Microsoft Music Producer (1997)
 
-Then when you open PowerPoint and load the Add-In, you can view it in the VBA editor. The VBA project is also password-protected, but [oledump https://blog.didierstevens.com/2020/07/20/cracking-vba-project-passwords/] revealed the password was simply `vbadev`.
+# Random Details
 
-## With `olevba`
-`olevba` cannot extract the code from `PPMUSIC.PPA`
+## PPMUSIC.PPA
+A VBA PowerPoint Add-In that implements the user interface but calls into the DLLs to actually generate the music. The VBA code from this Add-In is extracted and included in this repository, but if you want to edit the Add-In yourself in PowerPoint 97 you can follow these steps:
+
+1. On the machine where you want to edit the Add-In, make sure all PowerPoint 97 instances are closed.
+2. Change the following Registry value to True: `HKEY_CURRENT_USER\Software\Microsoft\Office\8.0\PowerPoint\Options\DebugAddins`. (You might also have to search the Registry and change it in other places too.)
+3. Re-open PowerPoint and go to the VBA editor. Now the Add-In is visible in the VBA editor!
+4. To view the code, enter the password `vbadev`. (Password revealed thanks to [oledump https://blog.didierstevens.com/2020/07/20/cracking-vba-project-passwords/].)
+
+`olevba` doesn't seem to be able to extract the code from this Add-In; I think I just did a manual export from the VBA editor.
+
+## PPMUSAU.DLL
+Coming soon!
+
+## PPMUSSET.DLL
+Coming soon!
