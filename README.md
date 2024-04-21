@@ -3,6 +3,8 @@ In `VALUPACK/MUSICTRK` on the English Office 97 CD-ROM, there lives a little-kno
 
 The music files installed to `C:\Interactive Music` are **styles (`.STY`)** and **personalities (`.PER`)**. The STYs are just like in DirectMusic, and DirectMusic Producer can open them just fine. But what DirectMusic later called "chordmaps" are instead "personalities". These "personailities" do include chordmap-like information... but no version of DirectMusic Producer I've found, going back to the DirectX 7 beta, can open these "personailities". The internal file structure of these personalities dramatically differs from DirectMusic chordmaps.
 
+Just like in DirectMusic, the style defines the motifs and the instruments (bands) in a chord-independent way; the personality actually defines probability paths through chord progressions.
+
 This project has several goals:
  - Identify the music generation engine, since it likely predates DirectMusic.
  - Find the application that can natively create and edit personailities.
