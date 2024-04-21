@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+# WARNING: VERY INCOMPLETE, DOES NOT WORK YET!!!
+#
 # Converts a pre-DirectMusic personality to a DirectMusic chordmap.
 # DirectMusic Producer can open the style (STY) files used by pre-DirectMusic
 # software, but DirectMusic Producer cannot open personality and chordmap files.
